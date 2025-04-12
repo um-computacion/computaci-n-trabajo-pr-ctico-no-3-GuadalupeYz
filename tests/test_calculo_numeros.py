@@ -19,6 +19,14 @@ class TestCalculoNumeros(unittest.TestCase):
         with self.assertRaises(Exception):
             ingrese_numero()
 
+    @patch(
+        'builtins.input',
+        return_value='aaoe'
+    )
+    def test_ingreso_texto_no_num(self, patch_input):
+        with self.assertRaises(Exception):  
+            ingrese_numero()
+
 
 if __name__ == '__main__':
     unittest.main() 
