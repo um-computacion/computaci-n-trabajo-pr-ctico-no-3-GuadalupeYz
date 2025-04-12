@@ -1,5 +1,13 @@
+
 import unittest
 from unittest.mock import patch
+
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from src.exceptions import ingrese_numero, NumeroDebeSerPositivo
+
 
 class TestCalculoNumeros(unittest.TestCase):
 
@@ -16,7 +24,7 @@ class TestCalculoNumeros(unittest.TestCase):
         return_value='-50'
     )
     def test_ingreso_negativo(self, patch_input):
-        with self.assertRaises(Exception):
+        with self.assertRaises(NumeroDebeSerPositivo): 
             ingrese_numero()
 
     @patch(
@@ -24,9 +32,8 @@ class TestCalculoNumeros(unittest.TestCase):
         return_value='aaoe'
     )
     def test_ingreso_texto_no_num(self, patch_input):
-        with self.assertRaises(Exception):  
+        with self.assertRaises(ValueError):  
             ingrese_numero()
 
-
 if __name__ == '__main__':
-    unittest.main() 
+    unittest.main()
